@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <unistd.h>
 
 #define sSize 25
 #define qSize 200
@@ -16,7 +17,7 @@ typedef struct node{
 
 bool addSubject();
 
-bool addQuestions(char *subject, char *question, char *answer);
+bool addQuestions();
 
 // randomize questions
 void quiz(char *subject);
