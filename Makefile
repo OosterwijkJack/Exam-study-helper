@@ -2,10 +2,10 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Idatabase -g
+CFLAGS = -Iprogram_files -g
 
 # Source files
-SRCS = main.c database/data.c
+SRCS = main.c program_files/data.c program_files/tools.c
 
 # Executable name
 EXEC = main

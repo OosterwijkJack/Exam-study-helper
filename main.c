@@ -15,8 +15,6 @@ This program helps study for exams
 - next question 
 
 */
-void flush();
-
 
 int main(void){
     char choice[2] = "\0";
@@ -31,7 +29,6 @@ int main(void){
 
         // get user choice
         fgets(choice,sizeof(choice),stdin);
-        choice[strcspn(choice, "\n")] = '\0';
 
         // remove any newline characters from stdin buffer
         flush();
@@ -47,12 +44,8 @@ int main(void){
         else if(cmp != 0){
             printf("Invalid input.\n");
         }
-        //sleep(2);
-       // system("clear");
+        sleep(2);
+        system("clear");
     }
     
-}
-void flush(){
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
 }

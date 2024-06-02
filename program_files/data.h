@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
+#include <tools.h>
 
 #define sSize 25
 #define qSize 200
