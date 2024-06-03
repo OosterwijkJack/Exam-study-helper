@@ -23,3 +23,19 @@ void free_linked_list(node *head){
         temp = head;
     }
 }
+
+void shuffle(int *array, size_t n)
+{
+    srand(time(NULL));
+
+    // Fisher-Yates shuffle algorithm
+    for (int i = n - 1; i > 0; i--) {
+        // Generate a random index j such that 0 <= j <= i
+        int j = rand() % (i + 1);
+
+        // Swap array[i] with the element at the random index
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}

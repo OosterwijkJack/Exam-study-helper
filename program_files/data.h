@@ -15,3 +15,5 @@ bool addQuestions();
 void quiz(char *subject);
 
 bool loadQuestions(char *subject);
+
+bool randomizeData();

@@ -45,6 +45,7 @@ int main(void){
             break;
         case 3:
             loadQuestions("Math");
+            randomizeData();
             break;
         case 0:
             return false;
@@ -53,7 +54,7 @@ int main(void){
             break;
         }
 
-        sleep(2);
+        sleep(3);
         system("clear");
 
     }

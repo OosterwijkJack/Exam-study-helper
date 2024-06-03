@@ -1,6 +1,7 @@
 #include <data.h>
 
 node *subjectData = NULL;
+int ncount = 0;
 
 bool addSubject(){
     system("clear");
@@ -79,8 +80,8 @@ bool addQuestions(){
 }
 
 bool loadQuestions(char *subject){
-    free_linked_list(subjectData);
-    subjectData = NULL;
+    ncount = 0;
+    free_linked_list(&subjectData);
 
     char dir[sSize];
     get_dir(subject, dir);
@@ -114,9 +115,55 @@ bool loadQuestions(char *subject){
         strcpy(new->answer, answer);
         new->next = subjectData;
         subjectData = new;
-
+        ncount++;
     }
-    
+
     fclose(file);
     return true;
+}
+bool randomizeData(){
+    if(subjectData == NULL){
+        return false;   
+    }
+
+    node *node_list[ncount];
+
+    node *tmp1 = subjectData;
+    node *tmp2 = tmp1->next;
+    // unload linked list as array
+    for(int i = 0; i<ncount; i++){
+        tmp1->next = NULL;
+        node_list[i] = tmp1;
+
+        tmp1 = tmp2;
+
+        if(tmp2->next != NULL)
+            tmp2 = tmp2->next;
+    }   
+    // shuffle
+    int shuffle_array[ncount];
+
+    for(int i = 0; i <ncount; i ++){
+        shuffle_array[i] =  i;
+    }
+
+    shuffle(shuffle_array, ncount);
+
+    node *shuffled_node_list[ncount];
+    for(int i = 0; i <ncount; i++){
+        shuffled_node_list[shuffle_array[i]] = node_list[i];
+    }
+    //reload
+
+    free_linked_list(&subjectData);
+    for(int i = 0; i <ncount; i++){
+        shuffled_node_list[i]->next = subjectData;
+        subjectData = shuffled_node_list[i];
+    }
+
+    node *ptr = subjectData;
+    while(ptr != NULL){
+        printf("question: %s\nanswer: %s\n", ptr->question, ptr->answer);
+        ptr = ptr->next;
+    }
 }
