@@ -1,6 +1,6 @@
 #include <data.h>
 
-node *subjectData;
+node *subjectData = NULL;
 
 bool addSubject(){
     system("clear");
@@ -11,10 +11,10 @@ bool addSubject(){
     fgets(subject, sizeof(subject), stdin);
 
     get_dir(subject, str);
+    printf("%s\n", str);
     FILE *fptr;
 
     fptr = fopen(str, "w");
-
     if(fptr == NULL){
         return false;
     }
@@ -38,9 +38,7 @@ bool addQuestions(){
     char dir[sSize];
 
     // directory str
-    strcpy(dir, "test_files/");
-    strcat(dir, subject);
-    strcat(dir, ".txt");
+    get_dir(subject, dir);
 
     // check if file eixsts
     if(access(dir, F_OK) != 0){
@@ -80,6 +78,45 @@ bool addQuestions(){
     
 }
 
-void loadQuestions(char *subject){
+bool loadQuestions(char *subject){
+    free_linked_list(subjectData);
+    subjectData = NULL;
+
+    char dir[sSize];
+    get_dir(subject, dir);
+
+    // check if file eixsts
+    if(access(dir, F_OK) != 0){
+        printf("Subject does not exist.\n");
+        return false;
+    }
+
+    // open file
+    FILE *file;
+    file = fopen(dir, "r");
+    if(file == NULL){
+        return false;
+    } 
+
+    // read question and answer
+    char question[qSize] = "\0";
+    char answer[aSize] = "\0";
+
+    while(fgets(question, sizeof(question), file) && fgets(answer, sizeof(answer), file)){
+        // remove \n
+        question[strcspn(question, "\n")] = 0;
+        answer[strcspn(answer, "\n")] = 0;
+
+        // make space for new node
+        node *new = malloc(sizeof(node));
+
+        strcpy(new->question, question);
+        strcpy(new->answer, answer);
+        new->next = subjectData;
+        subjectData = new;
+
+    }
     
+    fclose(file);
+    return true;
 }

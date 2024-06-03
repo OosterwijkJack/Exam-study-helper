@@ -5,12 +5,7 @@
 #include <unistd.h>
 #include <tools.h>
 
-typedef struct node{
-    char subjectName[sSize];
-    char question[qSize];
-    char answer[aSize];
-    struct node *next;
-}node;
+#pragma once
 
 bool addSubject();
 
@@ -19,4 +14,4 @@ bool addQuestions();
 // randomize questions
 void quiz(char *subject);
 
-void loadQuestions(char *subject);
+bool loadQuestions(char *subject);

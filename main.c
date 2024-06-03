@@ -43,6 +43,9 @@ int main(void){
         case 2:
             addQuestions();
             break;
+        case 3:
+            loadQuestions("Math");
+            break;
         case 0:
             return false;
         default:
@@ -52,7 +55,6 @@ int main(void){
 
         sleep(2);
         system("clear");
-
 
     }
     
