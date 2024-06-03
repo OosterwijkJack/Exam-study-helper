@@ -5,10 +5,6 @@
 #include <unistd.h>
 #include <tools.h>
 
-#define sSize 25
-#define qSize 200
-#define aSize 100
-
 typedef struct node{
     char subjectName[sSize];
     char question[qSize];

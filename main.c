@@ -34,18 +34,26 @@ int main(void){
         flush();
     
         cmp = atoi(choice);
+        
 
-        if(cmp == 1){
-           addSubject();
-        }
-        else if(cmp == 2){
+        switch(cmp){
+        case 1:
+            addSubject();
+            break;
+        case 2:
             addQuestions();
+            break;
+        case 0:
+            return false;
+        default:
+            printf("Invalid option.\n");
+            break;
         }
-        else if(cmp != 0){
-            printf("Invalid input.\n");
-        }
+
         sleep(2);
         system("clear");
+
+
     }
     
 }

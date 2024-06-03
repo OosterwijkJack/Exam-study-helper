@@ -1,6 +1,6 @@
 #include <data.h>
 
-node *subjectData[10];
+node *subjectData;
 
 bool addSubject(){
     system("clear");
@@ -10,9 +10,7 @@ bool addSubject(){
     printf("Enter subject: ");
     fgets(subject, sizeof(subject), stdin);
 
-    strcpy(str, "test_files/");
-    strcat(str, subject);
-    strcat(str, ".txt");
+    get_dir(subject, str);
     FILE *fptr;
 
     fptr = fopen(str, "w");
@@ -57,7 +55,6 @@ bool addQuestions(){
         question[strcspn(question, "\n")] = 0;
 
         if(strcmp(question, "q") == 0){
-            printf("Quitting.\n");
             break;
         }
 
@@ -80,5 +77,9 @@ bool addQuestions(){
         printf("Question added.\n\n");
     }
     return true;
+    
+}
+
+void loadQuestions(char *subject){
     
 }

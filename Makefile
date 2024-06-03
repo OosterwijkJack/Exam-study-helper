@@ -11,7 +11,8 @@ SRCS = main.c program_files/data.c program_files/tools.c
 EXEC = main
 
 # Default rule
-all: $(EXEC)
+all:
+	$(EXEC)
 
 # Rule to compile source files directly into the executable
 $(EXEC):
