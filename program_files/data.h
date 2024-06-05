@@ -12,7 +12,7 @@ bool addSubject();
 bool addQuestions();
 
 // randomize questions
-void quiz(char *subject);
+bool quiz();
 
 bool loadQuestions(char *subject);
 

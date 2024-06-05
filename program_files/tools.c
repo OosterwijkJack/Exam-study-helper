@@ -15,13 +15,17 @@ void get_dir(char *subject, char *str){
     
 }
 
-void free_linked_list(node *head){
-    node *temp = head;
-    while(temp != NULL){
-        head = head->next;
-        free(temp);
-        temp = head;
+void free_linked_list(node **head){
+    struct node* current = *head;
+    struct node* next;
+
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
     }
+
+    *head = NULL;
 }
 
 void shuffle(int *array, size_t n)
@@ -37,5 +41,14 @@ void shuffle(int *array, size_t n)
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+    }
+}
+void clear_linked_list(node *head){
+    node *temp;
+    while(temp != NULL){
+        temp = head->next;
+        memset(&temp, 0, sizeof(temp));
+        temp = NULL;
+        head=temp;
     }
 }

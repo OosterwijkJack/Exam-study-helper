@@ -46,6 +46,7 @@ int main(void){
         case 3:
             loadQuestions("Math");
             randomizeData();
+            quiz();
             break;
         case 0:
             return false;

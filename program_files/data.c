@@ -81,10 +81,12 @@ bool addQuestions(){
 
 bool loadQuestions(char *subject){
     ncount = 0;
-    free_linked_list(&subjectData);
+
+    if(subjectData != NULL)
+        free_linked_list(&subjectData);
 
     char dir[sSize];
-    get_dir(subject, dir);
+    get_dir(subject,dir);
 
     // check if file eixsts
     if(access(dir, F_OK) != 0){
@@ -149,21 +151,38 @@ bool randomizeData(){
 
     shuffle(shuffle_array, ncount);
 
-    node *shuffled_node_list[ncount];
+    node *temp_list;
     for(int i = 0; i <ncount; i++){
-        shuffled_node_list[shuffle_array[i]] = node_list[i];
+        temp_list = malloc(sizeof(node));
+        strcpy(temp_list->question, node_list[shuffle_array[i]]->question);
+        strcpy(temp_list->answer, node_list[shuffle_array[i]]->answer);
+        temp_list->next = subjectData;
+        subjectData = temp_list;
     }
-    //reload
+    //reload linked list
 
-    free_linked_list(&subjectData);
-    for(int i = 0; i <ncount; i++){
-        shuffled_node_list[i]->next = subjectData;
-        subjectData = shuffled_node_list[i];
-    }
+    //if(subjectData != NULL)
+     //   free_linked_list(&subjectData);
 
+    subjectData = temp_list;
     node *ptr = subjectData;
     while(ptr != NULL){
         printf("question: %s\nanswer: %s\n", ptr->question, ptr->answer);
         ptr = ptr->next;
     }
+}
+bool quiz(){
+
+    node *ptr = subjectData;
+    char answer[aSize] = "\0";
+    while(ptr != NULL){
+        printf("question: %s\n", ptr->question);
+        printf("\nEnter answer: ");
+        fgets(answer, sizeof(answer), stdin);
+
+        printf("Answer: %s\n", ptr->answer);
+        ptr = ptr->next;
+    }
+
+    return true;
 }
