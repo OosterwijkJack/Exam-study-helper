@@ -55,7 +55,7 @@ int main(void){
             break;
         }
 
-        sleep(3);
+        sleep(2);
         system("clear");
 
     }

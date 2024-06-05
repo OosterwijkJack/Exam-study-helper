@@ -8,12 +8,9 @@
 #pragma once
 
 bool addSubject();
-
 bool addQuestions();
-
 // randomize questions
 bool quiz();
-
 bool loadQuestions(char *subject);
-
 bool randomizeData();
+bool unloadQuestion();

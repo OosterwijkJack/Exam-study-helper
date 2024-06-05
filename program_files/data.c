@@ -3,6 +3,9 @@
 node *subjectData = NULL;
 int ncount = 0;
 
+#define ANSI_COLOR_GREEN    "\x1b[32m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
+
 bool addSubject(){
     system("clear");
     char subject[sSize];
@@ -152,6 +155,7 @@ bool randomizeData(){
     shuffle(shuffle_array, ncount);
 
     node *temp_list;
+    free_linked_list(&subjectData);
     for(int i = 0; i <ncount; i++){
         temp_list = malloc(sizeof(node));
         strcpy(temp_list->question, node_list[shuffle_array[i]]->question);
@@ -175,14 +179,22 @@ bool quiz(){
 
     node *ptr = subjectData;
     char answer[aSize] = "\0";
+    char empty_buffer[sSize];
     while(ptr != NULL){
-        printf("question: %s\n", ptr->question);
+        printf("\nquestion: %s\n", ptr->question);
         printf("\nEnter answer: ");
         fgets(answer, sizeof(answer), stdin);
 
-        printf("Answer: %s\n", ptr->answer);
+        printf(ANSI_COLOR_GREEN "Answer: %s\n" ANSI_COLOR_RESET, ptr->answer);
+        printf("\nEnter to continue...");
+        fgets(empty_buffer, sizeof(empty_buffer), stdin);
+        system("clear");
+
         ptr = ptr->next;
     }
 
     return true;
+}
+bool unloadQuestions(){
+    
 }
