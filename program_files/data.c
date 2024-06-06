@@ -163,17 +163,7 @@ bool randomizeData(){
         temp_list->next = subjectData;
         subjectData = temp_list;
     }
-    //reload linked list
-
-    //if(subjectData != NULL)
-     //   free_linked_list(&subjectData);
-
-    subjectData = temp_list;
-    node *ptr = subjectData;
-    while(ptr != NULL){
-        printf("question: %s\nanswer: %s\n", ptr->question, ptr->answer);
-        ptr = ptr->next;
-    }
+    return true;
 }
 bool quiz(){
 

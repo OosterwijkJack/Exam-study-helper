@@ -44,7 +44,7 @@ int main(void){
             addQuestions();
             break;
         case 3:
-            loadQuestions("Math");
+            loadQuestions("Biology");
             randomizeData();
             quiz();
             break;
