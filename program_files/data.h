@@ -11,6 +11,6 @@ bool addSubject();
 bool addQuestions();
 // randomize questions
 bool quiz();
-bool loadQuestions(char *subject);
+bool loadQuestions();
 bool randomizeData();
 bool unloadQuestion();

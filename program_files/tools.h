@@ -21,3 +21,4 @@ void get_dir(char *subject, char *str);
 void free_linked_list(node **head);
 void shuffle(int *array, size_t n);
 void clear_linked_list(node *head);
+void copyLinkedList(node **dest, node *src);

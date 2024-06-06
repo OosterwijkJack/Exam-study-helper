@@ -82,8 +82,12 @@ bool addQuestions(){
     
 }
 
-bool loadQuestions(char *subject){
+bool loadQuestions(){
     ncount = 0;
+    char subject[sSize];
+
+    printf("Enter subject: ");
+    fgets(subject, sizeof(subject), stdin);
 
     if(subjectData != NULL)
         free_linked_list(&subjectData);
@@ -96,7 +100,7 @@ bool loadQuestions(char *subject){
         printf("Subject does not exist.\n");
         return false;
     }
-
+    system("clear");
     // open file
     FILE *file;
     file = fopen(dir, "r");
@@ -131,20 +135,6 @@ bool randomizeData(){
         return false;   
     }
 
-    node *node_list[ncount];
-
-    node *tmp1 = subjectData;
-    node *tmp2 = tmp1->next;
-    // unload linked list as array
-    for(int i = 0; i<ncount; i++){
-        tmp1->next = NULL;
-        node_list[i] = tmp1;
-
-        tmp1 = tmp2;
-
-        if(tmp2->next != NULL)
-            tmp2 = tmp2->next;
-    }   
     // shuffle
     int shuffle_array[ncount];
 
@@ -154,15 +144,24 @@ bool randomizeData(){
 
     shuffle(shuffle_array, ncount);
 
-    node *temp_list;
+    node *temp_ptr = NULL;
+    node *new;
+    for(int i = 0; i <ncount; i ++){
+
+        node *swp_ptr = subjectData;
+        for(int j = 0; j <shuffle_array[i]; j ++){
+            swp_ptr = swp_ptr->next;
+        }
+
+        new = malloc(sizeof(node));
+        strcpy(new->question, swp_ptr->question);
+        strcpy(new->answer, swp_ptr->answer);
+        new->next = temp_ptr;
+        temp_ptr = new;
+    }   
     free_linked_list(&subjectData);
-    for(int i = 0; i <ncount; i++){
-        temp_list = malloc(sizeof(node));
-        strcpy(temp_list->question, node_list[shuffle_array[i]]->question);
-        strcpy(temp_list->answer, node_list[shuffle_array[i]]->answer);
-        temp_list->next = subjectData;
-        subjectData = temp_list;
-    }
+    subjectData = temp_ptr;
+
     return true;
 }
 bool quiz(){
@@ -182,7 +181,7 @@ bool quiz(){
 
         ptr = ptr->next;
     }
-
+    free_linked_list(&subjectData);
     return true;
 }
 bool unloadQuestions(){

@@ -52,3 +52,37 @@ void clear_linked_list(node *head){
         head=temp;
     }
 }
+
+void copyLinkedList(node **dest, node *src) {
+    *dest = NULL;  // Initialize dest to NULL
+
+    node *tail = NULL;  // Tail of the new list
+    node *tmp = src;
+
+    while (tmp != NULL) {
+        // Allocate memory for the new node
+        node *newNode = (node*)malloc(sizeof(node));
+        if (newNode == NULL) {
+            // Handle memory allocation failure (optional)
+            exit(1);
+        }
+
+        // Copy the data from the source node to the new node
+        strcpy(newNode->question, tmp->question);
+        strcpy(newNode->answer, tmp->answer);
+        newNode->next = NULL;
+
+        if (*dest == NULL) {
+            // If this is the first node, set dest and tail to this node
+            *dest = newNode;
+            tail = newNode;
+        } else {
+            // Otherwise, link the new node to the end of the list and update the tail
+            tail->next = newNode;
+            tail = newNode;
+        }
+
+        // Move to the next node in the source list
+        tmp = tmp->next;
+    }
+}
