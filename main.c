@@ -59,5 +59,6 @@ int main(void){
         system("clear");
 
     }
+    unloadQuestion();
     
 }

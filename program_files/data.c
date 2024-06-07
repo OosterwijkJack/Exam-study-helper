@@ -184,6 +184,7 @@ bool quiz(){
     free_linked_list(&subjectData);
     return true;
 }
-bool unloadQuestions(){
-    
+bool unloadQuestion(){
+    free_linked_list(&subjectData);
+    return true;
 }
