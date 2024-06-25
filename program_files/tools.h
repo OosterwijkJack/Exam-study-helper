@@ -6,8 +6,8 @@
 #pragma once
 
 #define sSize 25
-#define qSize 200
-#define aSize 100
+#define qSize 1000
+#define aSize 1000
 
 typedef struct node{
     char question[qSize];
